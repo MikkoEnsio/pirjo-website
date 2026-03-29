@@ -1,0 +1,21 @@
+---
+title: Home
+layout: base.njk
+---
+
+<section style="position: relative; width: 100%; margin: 0;">
+  <img src="/assets/images/home/pirjo-home.jpg" alt="Pirjo Pesonen artwork" style="display: block; width: 100%; height: auto;">
+
+  <div style="position: absolute; top: 70%; left: 50%; color: white; text-align: left;">
+    <h1 style="margin: 0 0 0.6rem 0; font-size: 3rem;">Pirjo Pesonen</h1>
+    <p style="margin: 0; font-size: 1.5rem;">Finnish ceramics and photo art</p>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    section div h1 { font-size: 1.2rem !important; }
+    section div p { font-size: 0.9rem !important; }
+    section div { top: 60% !important; left: 10% !important; }
+  }
+</style>

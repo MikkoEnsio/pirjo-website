@@ -1,0 +1,9 @@
+node_modules/
+dist/
+_site/
+src/assets/
+Site Files/
+Site Files.zip
+.DS_Store
+test.txt
+test_crop.html

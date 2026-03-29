@@ -1,0 +1,82 @@
+---
+title: Blog
+layout: base.njk
+---
+
+<div style="max-width: 800px; margin: 0 auto;">
+  {% for post in collections.blog %}
+  {% set loopIndex = loop.index0 %}
+  <div style="display: flex; gap: 24px; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid #666; cursor: pointer;" onclick="openLightbox({{ loop.index0 }})">
+    {% if post.data.image %}
+    <img src="{{ post.data.image }}" alt="{{ post.data.title }}" style="width: 200px; height: 150px; object-fit: cover; flex-shrink: 0;">
+    {% else %}
+    <div style="width: 200px; height: 150px; background: #666; flex-shrink: 0;"></div>
+    {% endif %}
+    <div>
+      <h2 style="margin: 0 0 8px 0; font-size: 18px;">{{ post.data.title }}</h2>
+      <p style="color: #ccc; font-size: 13px; margin-bottom: 8px;">{{ post.date }}</p>
+      <p style="font-size: 15px; color: #ddd;">{{ post.data.excerpt }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div id="lightbox" class="lightbox" onclick="lightboxBackgroundClick(event)">
+  <button type="button" class="lightbox-close" onclick="closeLightbox(event)">×</button>
+  <button type="button" class="lightbox-prev" onclick="prevImage(event)">‹</button>
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <img id="lightbox-image" class="lightbox-image" src="" alt="">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+  <button type="button" class="lightbox-next" onclick="nextImage(event)">›</button>
+</div>
+
+<script>
+  const blogImages = [
+    {% for post in collections.blog %}
+    "{{ post.data.image if post.data.image else '' }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ];
+  const blogTitles = [
+    {% for post in collections.blog %}
+    "{{ post.data.title }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ];
+
+  let currentImageIndex = 0;
+
+  function updateLightbox() {
+    document.getElementById("lightbox-image").src = blogImages[currentImageIndex];
+    document.getElementById("lightbox-image").alt = blogTitles[currentImageIndex];
+    document.getElementById("lightbox-caption").textContent = blogTitles[currentImageIndex];
+  }
+  function openLightbox(index) {
+    currentImageIndex = index;
+    updateLightbox();
+    document.getElementById("lightbox").style.display = "flex";
+  }
+  function closeLightbox(event) {
+    if (event) event.stopPropagation();
+    document.getElementById("lightbox").style.display = "none";
+  }
+  function prevImage(event) {
+    event.stopPropagation();
+    currentImageIndex = (currentImageIndex - 1 + blogImages.length) % blogImages.length;
+    updateLightbox();
+  }
+  function nextImage(event) {
+    event.stopPropagation();
+    currentImageIndex = (currentImageIndex + 1) % blogImages.length;
+    updateLightbox();
+  }
+  function lightboxBackgroundClick(event) {
+    if (event.target.id === "lightbox") closeLightbox();
+  }
+  document.addEventListener("keydown", function(event) {
+    const lightbox = document.getElementById("lightbox");
+    if (lightbox.style.display !== "flex") return;
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowLeft") { currentImageIndex = (currentImageIndex - 1 + blogImages.length) % blogImages.length; updateLightbox(); }
+    if (event.key === "ArrowRight") { currentImageIndex = (currentImageIndex + 1) % blogImages.length; updateLightbox(); }
+  });
+</script>

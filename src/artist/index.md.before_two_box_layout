@@ -1,0 +1,22 @@
+---
+title: Myself
+layout: base.njk
+---
+
+<section style="max-width: 1100px; margin: 0 auto;">
+  <div style="display: flex; align-items: flex-start; gap: 40px;">
+    <div style="flex: 0 0 320px;">
+      <img src="/assets/images/artist/pirjo_pesonen.jpg" alt="Pirjo Pesonen" style="display: block; width: 100%; height: auto;">
+    </div>
+
+    <div style="flex: 1; font-size: 22px; line-height: 1.7;">
+      <p>In my ceramics I strive for simple and bold forms and intense colors. My pieces are produced either by hand or cast in moulds in limited series. My ceramics is made of durable high-fired stoneware clays and the glazes I use are food safe. My career as a ceramist began with ceramic sculpture and later evolved to include utility articles and gifts, such as bowls and vases. I also sculpt custom-made cinerary urns to order.</p>
+
+      <p>In recent years my work has been increasingly motivated by themes related intimately to my own life, such as aging and grief. I'm trying to find a personal, three-dimensional shape of archetypal, shared emotional experiences. My artistic vision has broadened to encompass different materials.</p>
+
+      <p>I am increasingly working with artistic photography and exhibiting my photographs.</p>
+
+      <p>The location of my previous studio Pot Viapori on the Sea Fortress Island called Suomenlinna was a continuous source of inspiration. Daily ferry trips to and from the island are always exceptionally beautiful and invoke strong sensations.</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,6 @@
+<nav style="position: absolute; top: 60px; left: 50%; transform: translateX(-50%); z-index: 1000; white-space: nowrap; font-size: 25px; letter-spacing: 0.08em;">
+  <a href="/" style="color: white; text-decoration: none; margin: 0 14px;">HOME</a>
+  <a href="/artist/" style="color: white; text-decoration: none; margin: 0 14px;">MYSELF</a>
+  <a href="/gallery/" style="color: white; text-decoration: none; margin: 0 14px;">MY ART</a>
+  <a href="/blog/" style="color: white; text-decoration: none; margin: 0 14px;">BLOG</a>
+</nav>

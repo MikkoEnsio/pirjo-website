@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or "Pirjo Pesonen" }}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    nav {
+      margin-bottom: 20px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .category-card {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      color: white;
+      overflow: hidden;
+      background-color: #cccccc;
+    }
+
+    .category-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .category-card span {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.92);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .lightbox-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 90vw;
+      max-height: 90vh;
+      margin: 0 auto;
+    }
+
+    .lightbox-image {
+      max-width: 90vw;
+      max-height: 78vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+
+    .lightbox-caption {
+      margin-top: 14px;
+      color: white;
+      font-size: 20px;
+      line-height: 1.4;
+      text-align: center;
+      min-height: 1.4em;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 28px;
+      font-size: 40px;
+      line-height: 1;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 10001;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 52px;
+      line-height: 1;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 12px 16px;
+      z-index: 10001;
+    }
+
+    .lightbox-prev {
+      left: 18px;
+    }
+
+    .lightbox-next {
+      right: 18px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">HOME</a> |
+    <a href="/artist/">MYSELF</a> |
+    <a href="/gallery/">MY ART</a> |
+    <a href="/contact/">CONTACT</a> |
+    <a href="/blog/">BLOG</a>
+  </nav>
+
+  <hr>
+
+  {{ content | safe }}
+</body>
+</html>

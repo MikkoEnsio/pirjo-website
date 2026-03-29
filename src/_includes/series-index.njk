@@ -1,0 +1,14 @@
+---
+layout: base.njk
+---
+# {{ title }}
+
+<div class="category-grid">
+  {% assign seriesKey = galleryKey | append: "Series" %}
+  {% for series in galleries[seriesKey] %}
+  <a class="category-card" href="{{ series.slug }}/">
+    <img src="{{ series.cover }}" alt="{{ series.slug }}">
+    <span>{{ series.slug | replace: "-", " " }}</span>
+  </a>
+  {% endfor %}
+</div>

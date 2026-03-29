@@ -1,0 +1,104 @@
+<style>
+  .site-nav {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    font-size: 25px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .site-nav a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .site-nav-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+  }
+
+  .site-nav-item {
+    position: relative;
+  }
+
+  .site-nav-link {
+    display: inline-block;
+  }
+
+  .site-subnav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 12px;
+    min-width: 260px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .site-subnav a {
+    display: block;
+    margin: 8px 0;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+  }
+
+  .site-nav-item:hover .site-subnav,
+  .site-nav-item:focus-within .site-subnav {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .site-nav {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      transform: none !important;
+      width: 100% !important;
+      font-size: 14px !important;
+      letter-spacing: 0 !important;
+      white-space: nowrap !important;
+      box-sizing: border-box;
+      padding: 10px 8px !important;
+    }
+    .site-nav-row {
+      gap: 14px !important;
+      justify-content: space-around !important;
+    }
+    .site-subnav {
+      display: none !important;
+    }
+  }
+</style>
+
+<nav class="site-nav">
+  <div class="site-nav-row">
+    <div class="site-nav-item">
+      <a class="site-nav-link" href="/">HOME</a>
+    </div>
+
+    <div class="site-nav-item">
+      <a class="site-nav-link" href="/artist/">MYSELF</a>
+    </div>
+
+    <div class="site-nav-item">
+      <a class="site-nav-link" href="/gallery/">MY ART</a>
+      <div class="site-subnav">
+        <a href="/gallery/tableware-ceramics/">TABLEWARE ceramics</a>
+        <a href="/gallery/unique-ceramics/">UNIQUE ceramics</a>
+        <a href="/gallery/art/">ART</a>
+        <a href="/gallery/photos/">PHOTOS</a>
+      </div>
+    </div>
+
+    <div class="site-nav-item">
+      <a class="site-nav-link" href="/blog/">BLOG</a>
+    </div>
+  </div>
+</nav>

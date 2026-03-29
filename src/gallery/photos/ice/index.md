@@ -1,0 +1,136 @@
+---
+title: Ice
+layout: base.njk
+---
+# Ice
+
+<div class="gallery-grid">
+  <a href="#" onclick="openLightbox(0); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/spring_ice.png" alt="Spring ice"></a>
+  <a href="#" onclick="openLightbox(1); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/february_ice.jpg" alt="February ice"></a>
+  <a href="#" onclick="openLightbox(2); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/yellow_ice.jpg" alt="Yellow ice"></a>
+  <a href="#" onclick="openLightbox(3); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/suomenlinna_jaata.jpg" alt="Suomenlinna jäätä"></a>
+  <a href="#" onclick="openLightbox(4); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/ice_on_beach.JPG" alt="Ice on beach"></a>
+  <a href="#" onclick="openLightbox(5); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/march_ice.jpg" alt="March ice"></a>
+  <a href="#" onclick="openLightbox(6); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/january_ice.jpg" alt="January ice"></a>
+  <a href="#" onclick="openLightbox(7); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/shuttered_ice.jpg" alt="Shuttered ice"></a>
+  <a href="#" onclick="openLightbox(8); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/change_is_coming.jpg" alt="Change is coming"></a>
+  <a href="#" onclick="openLightbox(9); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/ice_wave.jpg" alt="Ice wave"></a>
+  <a href="#" onclick="openLightbox(10); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/ice_are_moving.jpg" alt="Ice are moving"></a>
+  <a href="#" onclick="openLightbox(11); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/spring_behind_corner.jpg" alt="Spring behind corner"></a>
+  <a href="#" onclick="openLightbox(12); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/see_with_thin_ice.jpg" alt="See with thin ice"></a>
+  <a href="#" onclick="openLightbox(13); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/reflection_on_ice.jpg" alt="Reflection on ice"></a>
+  <a href="#" onclick="openLightbox(14); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/ice_on_puddle.jpg" alt="Ice on puddle"></a>
+  <a href="#" onclick="openLightbox(15); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/leftovers.jpg" alt="Leftovers"></a>
+  <a href="#" onclick="openLightbox(16); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/october_ice.JPG" alt="October ice"></a>
+  <a href="#" onclick="openLightbox(17); return false;"><img style="object-position: 50% 50%;" src="/assets/images/photos/ice/ice_on_strand.jpg" alt="Ice on strand"></a>
+</div>
+
+<div id="lightbox" class="lightbox" onclick="lightboxBackgroundClick(event)">
+  <button type="button" class="lightbox-close" onclick="closeLightbox(event)">×</button>
+  <button type="button" class="lightbox-prev" onclick="prevImage(event)">‹</button>
+
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <img id="lightbox-image" class="lightbox-image" src="" alt="">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+
+  <button type="button" class="lightbox-next" onclick="nextImage(event)">›</button>
+</div>
+
+<script>
+  const iceImages = [
+    "/assets/images/photos/ice/spring_ice.png",
+    "/assets/images/photos/ice/february_ice.jpg",
+    "/assets/images/photos/ice/yellow_ice.jpg",
+    "/assets/images/photos/ice/suomenlinna_jaata.jpg",
+    "/assets/images/photos/ice/ice_on_beach.JPG",
+    "/assets/images/photos/ice/march_ice.jpg",
+    "/assets/images/photos/ice/january_ice.jpg",
+    "/assets/images/photos/ice/shuttered_ice.jpg",
+    "/assets/images/photos/ice/change_is_coming.jpg",
+    "/assets/images/photos/ice/ice_wave.jpg",
+    "/assets/images/photos/ice/ice_are_moving.jpg",
+    "/assets/images/photos/ice/spring_behind_corner.jpg",
+    "/assets/images/photos/ice/see_with_thin_ice.jpg",
+    "/assets/images/photos/ice/reflection_on_ice.jpg",
+    "/assets/images/photos/ice/ice_on_puddle.jpg",
+    "/assets/images/photos/ice/leftovers.jpg",
+    "/assets/images/photos/ice/october_ice.JPG",
+    "/assets/images/photos/ice/ice_on_strand.jpg"
+  ];
+
+  const iceTitles = [
+    "Spring ice",
+    "February ice",
+    "Yellow ice",
+    "Suomenlinna jäätä",
+    "Ice on beach",
+    "March ice",
+    "January ice",
+    "Shuttered ice",
+    "Change is coming",
+    "Ice wave",
+    "Ice are moving",
+    "Spring behind corner",
+    "See with thin ice",
+    "Reflection on ice",
+    "Ice on puddle",
+    "Leftovers",
+    "October ice",
+    "Ice on strand"
+  ];
+
+  let currentImageIndex = 0;
+
+  function updateLightbox() {
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    lightboxImage.src = iceImages[currentImageIndex];
+    lightboxImage.alt = iceTitles[currentImageIndex];
+    lightboxCaption.textContent = iceTitles[currentImageIndex];
+  }
+
+  function openLightbox(index) {
+    currentImageIndex = index;
+    updateLightbox();
+    document.getElementById("lightbox").style.display = "flex";
+  }
+
+  function closeLightbox(event) {
+    if (event) event.stopPropagation();
+    document.getElementById("lightbox").style.display = "none";
+  }
+
+  function prevImage(event) {
+    event.stopPropagation();
+    currentImageIndex = (currentImageIndex - 1 + iceImages.length) % iceImages.length;
+    updateLightbox();
+  }
+
+  function nextImage(event) {
+    event.stopPropagation();
+    currentImageIndex = (currentImageIndex + 1) % iceImages.length;
+    updateLightbox();
+  }
+
+  function lightboxBackgroundClick(event) {
+    if (event.target.id === "lightbox") {
+      closeLightbox();
+    }
+  }
+
+  document.addEventListener("keydown", function(event) {
+    const lightbox = document.getElementById("lightbox");
+    if (lightbox.style.display !== "flex") return;
+
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowLeft") {
+      currentImageIndex = (currentImageIndex - 1 + iceImages.length) % iceImages.length;
+      updateLightbox();
+    }
+    if (event.key === "ArrowRight") {
+      currentImageIndex = (currentImageIndex + 1) % iceImages.length;
+      updateLightbox();
+    }
+  });
+</script>

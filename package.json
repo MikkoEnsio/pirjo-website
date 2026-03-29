@@ -1,0 +1,17 @@
+{
+  "name": "pirjo_website_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "build": "npx @11ty/eleventy --input=src --output=dist",
+  "serve": "npx @11ty/eleventy --serve --input=src --output=dist"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}

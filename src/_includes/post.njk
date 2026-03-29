@@ -1,0 +1,28 @@
+---
+layout: base.njk
+---
+<article style="max-width: 800px; margin: 0 auto;">
+  <h1>{{ title }}</h1>
+  <p style="color: #ccc; font-size: 14px; margin-bottom: 24px;">{{ date }}</p>
+  {{ content | safe }}
+</article>
+
+<style>
+  article img {
+    width: 280px;
+    height: auto;
+    float: left;
+    margin-right: 32px;
+    margin-bottom: 16px;
+  }
+  article p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 12px 0;
+  }
+  article::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+</style>
