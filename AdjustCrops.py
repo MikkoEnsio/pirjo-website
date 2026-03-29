@@ -201,9 +201,15 @@ def build_html(pages):
 <div class="overlay" id="overlay">
   <div class="modal">
     <h2 id="modal-title">Adjust crop</h2>
-    <p class="hint">Drag the photo to reposition it inside the green frame.</p>
+    <p class="hint">Drag the photo to reposition. Use the slider to zoom.</p>
     <div class="crop-frame" id="crop-frame">
       <img id="crop-img" src="" alt="">
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:13px;color:#777;">−</span>
+      <input type="range" id="zoom-slider" min="100" max="300" value="100" step="1" style="flex:1;">
+      <span style="font-size:13px;color:#777;">+</span>
+      <span id="zoom-label" style="font-size:12px;color:#555;min-width:38px;">100%</span>
     </div>
     <div class="modal-btns">
       <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
@@ -225,12 +231,26 @@ const current  = {{}};
 const FRAME = 320;
 let modalKey = null;
 let imgNatW = 0, imgNatH = 0;
+let imgBaseW = 0, imgBaseH = 0;  // size at 100% zoom
 let imgDisplayW = 0, imgDisplayH = 0;
 let imgX = 0, imgY = 0;
+let zoomPct = 100;
 let dragging = false;
 let dragStartX, dragStartY, dragStartImgX, dragStartImgY;
 
 function key(pi, ii) {{ return pi + '_' + ii; }}
+
+function setZoom(pct) {{
+  zoomPct = pct;
+  document.getElementById('zoom-label').textContent = pct + '%';
+  // Recalculate display size
+  imgDisplayW = Math.round(imgBaseW * pct / 100);
+  imgDisplayH = Math.round(imgBaseH * pct / 100);
+  // Clamp position so image stays within frame
+  imgX = clamp(imgX, -(imgDisplayW - FRAME), 0);
+  imgY = clamp(imgY, -(imgDisplayH - FRAME), 0);
+  applyTransform();
+}}
 
 function buildGallery() {{
   const gallery = document.getElementById('gallery');
@@ -277,21 +297,36 @@ function openModal(pi, ii) {{
   cropImg.onload = () => {{
     imgNatW = cropImg.naturalWidth;
     imgNatH = cropImg.naturalHeight;
-    // Scale so shorter side fills the frame
-    const scale = Math.max(FRAME / imgNatW, FRAME / imgNatH);
-    imgDisplayW = Math.round(imgNatW * scale);
-    imgDisplayH = Math.round(imgNatH * scale);
+    // Base scale: longer side fills the frame (so both sides have room to pan)
+    const scale = Math.min(FRAME / imgNatW, FRAME / imgNatH);
+    imgBaseW = Math.round(imgNatW * scale);
+    imgBaseH = Math.round(imgNatH * scale);
+    // Reset zoom to 100%
+    const slider = document.getElementById('zoom-slider');
+    slider.value = 100;
+    zoomPct = 100;
+    document.getElementById('zoom-label').textContent = '100%';
+    imgDisplayW = imgBaseW;
+    imgDisplayH = imgBaseH;
     // Set initial position from saved object-position
     const parts = current[k].split(' ');
     const px = parseFloat(parts[0]) / 100;
     const py = parseFloat(parts[1] !== undefined ? parts[1] : parts[0]) / 100;
     imgX = -Math.round((imgDisplayW - FRAME) * px);
     imgY = -Math.round((imgDisplayH - FRAME) * py);
+    // Clamp (at 100% zoom whole image fits, so center it)
+    imgX = clamp(imgX, -(imgDisplayW - FRAME), 0);
+    imgY = clamp(imgY, -(imgDisplayH - FRAME), 0);
     applyTransform();
   }};
   cropImg.src = img.src;
   document.getElementById('overlay').classList.add('open');
 }}
+
+// Wire up zoom slider
+document.getElementById('zoom-slider').addEventListener('input', function() {{
+  setZoom(parseInt(this.value));
+}});
 
 function applyTransform() {{
   const img = document.getElementById('crop-img');
